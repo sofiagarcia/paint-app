@@ -7,7 +7,7 @@ var circle = {
 	green: {x: 200, col: "#60b896", leftSide: 160, rightSide: 240},
 	lilac: {x: 300, col: "#9b84af", leftSide: 260, rightSide: 340},
 	yellow: {x: 400, col: "#f7b320", leftSide: 360, rightSide: 440 },
-	random: {x: 500, col: "#ffffff", leftSide: 460, rightSide: 540},
+	random: {x: 500, col : '0', leftSide: 460, rightSide: 540},
 	y: 500,
 	diameter: 80,
   radius: 40
@@ -112,6 +112,6 @@ function mousePressed() {
   } if(currentColor == "yellow") {
      brushColor = circle.yellow.col;
   } if(currentColor == "random") {
-     brushColor = circle.random.col;
+     brushColor = random(255), random(255), random(255);
   }
 }
