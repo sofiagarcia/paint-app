@@ -1,3 +1,6 @@
+var currentColor = " ";
+
+//Initializing Color Samples
 var circle = {
 	red : {x: 100, col: "#e54341", leftSide: 60, rightSide: 140},
 	green: {x: 200, col: "#60b896", leftSide: 160, rightSide: 240},
@@ -9,17 +12,22 @@ var circle = {
   radius: 40
 };
 
-var boundary = {
+var circleBoundary = {
 	top : circle.y - circle.radius,
 	bottom: circle.y + circle.radius
 };
 
-var currentColor = " ";
-// var topBoundary = circle.y - circle.radius;
-// var leftBoundary = circle.red.x - circle.radius;
-// var rightBoundary = circle.red.x + circle.radius
-// var bottomBoundary = circle.y + circle.radius;
+//Initializing Brushes
+var brushSize = {
+	small : {x: 500, y: 50, diameter: 25, col: '#ffffff'},
+	large : {x: 550, y: 50, diameter: 35, col: '#ffffff'}
+}
 
+var brushBoundary = {
+	top: {small: brushSize.small.y, large: brushSize.large.y}
+}
+
+//Canvas
 function setup() {
 	createCanvas(600, 600);
 }
@@ -28,7 +36,15 @@ function setup() {
 function draw() {
 background(2);
 
-//Color Samples to choose from
+//Brush Sizes
+fill(brushSize.small.col)
+ellipse(brushSize.small.x, brushSize.small.y, brushSize.small.diameter, brushSize.small.diameter);
+
+fill(brushSize.large.col)
+ellipse(brushSize.large.x, brushSize.large.y, brushSize.large.diameter, brushSize.large.diameter);
+
+
+//Color Samples
 fill(circle.red.col); //red
 ellipse(circle.red.x, circle.y, circle.diameter, circle.diameter);
 
@@ -44,9 +60,8 @@ ellipse(circle.yellow.x, circle.y, circle.diameter, circle.diameter);
 fill(circle.random.col);//random (grey scale)
 ellipse(circle.random.x, circle.y, circle.diameter, circle.diameter);
 
-//
-
-if(mouseY > boundary.top && mouseY < boundary.bottom){
+// Selecting Colors
+if(mouseY > circleBoundary.top && mouseY < circleBoundary.bottom){
 	if(mouseX > circle.red.leftSide && mouseX < circle.red.rightSide ){
 			currentColor = "red";
 			console.log(currentColor);
@@ -64,6 +79,7 @@ if(mouseY > boundary.top && mouseY < boundary.bottom){
 				console.log(currentColor);
 	}
 }
+
 
 
 }
