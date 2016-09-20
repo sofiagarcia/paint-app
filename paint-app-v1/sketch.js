@@ -1,4 +1,5 @@
 var currentColor = " ";
+var brushColor = "0";
 
 //Initializing Color Samples
 var circle = {
@@ -19,29 +20,33 @@ var circleBoundary = {
 
 //Initializing Brushes
 var brushSize = {
-	small : {x: 500, y: 50, diameter: 25, col: '#ffffff'},
-	large : {x: 550, y: 50, diameter: 35, col: '#ffffff'}
+	small : {x: 500, diameter: 20, col: '#ffffff', leftSide: 490, rightSide: 510},
+	large : {x: 550, diameter: 30, col: '#ffffff', leftSide: 535, rightSide: 565},
+	y: 50,
+	r1: 10,
+	r2: 15
 }
 
-var brushBoundary = {
-	top: {small: brushSize.small.y, large: brushSize.large.y}
+var smallBoundary = {
+	top: brushSize.y - brushSize.r1,
+	bottom: brushSize.y + brushSize.r1
 }
 
 //Canvas
 function setup() {
 	createCanvas(600, 600);
+	background('#ebeef0');
 }
 
 
 function draw() {
-background(2);
 
 //Brush Sizes
 fill(brushSize.small.col)
-ellipse(brushSize.small.x, brushSize.small.y, brushSize.small.diameter, brushSize.small.diameter);
+ellipse(brushSize.small.x, brushSize.y, brushSize.small.diameter, brushSize.small.diameter);
 
 fill(brushSize.large.col)
-ellipse(brushSize.large.x, brushSize.large.y, brushSize.large.diameter, brushSize.large.diameter);
+ellipse(brushSize.large.x, brushSize.y, brushSize.large.diameter, brushSize.large.diameter);
 
 
 //Color Samples
@@ -54,7 +59,7 @@ ellipse(circle.green.x, circle.y, circle.diameter, circle.diameter);
 fill(circle.lilac.col);//purple
 ellipse(circle.lilac.x, circle.y, circle.diameter, circle.diameter);
 
-fill(circle.yellow.col);//yellodiameter
+fill(circle.yellow.col);//yellow
 ellipse(circle.yellow.x, circle.y, circle.diameter, circle.diameter);
 
 fill(circle.random.col);//random (grey scale)
@@ -80,6 +85,33 @@ if(mouseY > circleBoundary.top && mouseY < circleBoundary.bottom){
 	}
 }
 
+//Create Brush
+fill(brushColor);
+ellipse(mouseX, mouseY, 10, 10);
 
+//Selecting Brush Size
+if(mouseY > smallBoundary.top && mouseY < smallBoundary.bottom){
+	if(mouseX > brushSize.small.leftSide && mouseX < brushSize.small.rightSide){
+		console.log('small');
+	} if(mouseX > brushSize.large.leftSide && mouseX < brushSize.large.rightSide){
+		console.log('large');
+	}
+}
 
+}
+
+function mousePressed() {
+
+  console.log(currentColor);
+  if(currentColor == "red"){
+     brushColor = circle.red.col;
+  } if(currentColor == "green"){
+     brushColor = circle.green.col;
+  } if(currentColor == "lilac"){
+    brushColor = circle.lilac.col;
+  } if(currentColor == "yellow") {
+     brushColor = circle.yellow.col;
+  } if(currentColor == "random") {
+     brushColor = circle.random.col;
+  }
 }
