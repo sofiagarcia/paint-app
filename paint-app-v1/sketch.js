@@ -88,8 +88,12 @@ if(mouseY > circleBoundary.top && mouseY < circleBoundary.bottom){
 }
 
 //Create brushSelect'
+
 	fill(brushColor);
 	ellipse(mouseX, mouseY, brushSize, brushSize);
+
+
+
 
 
 
@@ -106,6 +110,12 @@ if(mouseY > smallBoundary.top && mouseY < smallBoundary.bottom){
 }
 
 function mousePressed() {
+	while(true){
+			console.log('down');
+	} else {
+		console.log('up');
+	}
+
 //Change Brush Color
   console.log(currentColor);
   if(currentColor == "red"){
