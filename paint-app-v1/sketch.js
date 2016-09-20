@@ -1,5 +1,7 @@
 var currentColor = " ";
 var brushColor = "0";
+var brushSize = 10;
+var brushSelection;
 
 //Initializing Color Samples
 var circle = {
@@ -18,8 +20,8 @@ var circleBoundary = {
 	bottom: circle.y + circle.radius
 };
 
-//Initializing Brushes
-var brushSize = {
+//Initializing brushSelectes
+var brushSelect = {
 	small : {x: 500, diameter: 20, col: '#ffffff', leftSide: 490, rightSide: 510},
 	large : {x: 550, diameter: 30, col: '#ffffff', leftSide: 535, rightSide: 565},
 	y: 50,
@@ -28,8 +30,8 @@ var brushSize = {
 }
 
 var smallBoundary = {
-	top: brushSize.y - brushSize.r1,
-	bottom: brushSize.y + brushSize.r1
+	top: brushSelect.y - brushSelect.r1,
+	bottom: brushSelect.y + brushSelect.r1
 }
 
 //Canvas
@@ -41,12 +43,12 @@ function setup() {
 
 function draw() {
 
-//Brush Sizes
-fill(brushSize.small.col)
-ellipse(brushSize.small.x, brushSize.y, brushSize.small.diameter, brushSize.small.diameter);
+//brushSelect Sizes
+fill(brushSelect.small.col)
+ellipse(brushSelect.small.x, brushSelect.y, brushSelect.small.diameter, brushSelect.small.diameter);
 
-fill(brushSize.large.col)
-ellipse(brushSize.large.x, brushSize.y, brushSize.large.diameter, brushSize.large.diameter);
+fill(brushSelect.large.col)
+ellipse(brushSelect.large.x, brushSelect.y, brushSelect.large.diameter, brushSelect.large.diameter);
 
 
 //Color Samples
@@ -85,15 +87,18 @@ if(mouseY > circleBoundary.top && mouseY < circleBoundary.bottom){
 	}
 }
 
-//Create Brush
-fill(brushColor);
-ellipse(mouseX, mouseY, 10, 10);
+//Create brushSelect'
+	fill(brushColor);
+	ellipse(mouseX, mouseY, brushSize, brushSize);
 
-//Selecting Brush Size
+
+
+//Selecting brushSelect Size
 if(mouseY > smallBoundary.top && mouseY < smallBoundary.bottom){
-	if(mouseX > brushSize.small.leftSide && mouseX < brushSize.small.rightSide){
-		console.log('small');
-	} if(mouseX > brushSize.large.leftSide && mouseX < brushSize.large.rightSide){
+	if(mouseX > brushSelect.small.leftSide && mouseX < brushSelect.small.rightSide){
+		brushSelection = "smaller";
+	} if(mouseX > brushSelect.large.leftSide && mouseX < brushSelect.large.rightSide){
+		brushSelection = "larger";
 		console.log('large');
 	}
 }
@@ -101,7 +106,7 @@ if(mouseY > smallBoundary.top && mouseY < smallBoundary.bottom){
 }
 
 function mousePressed() {
-
+//Change Brush Color
   console.log(currentColor);
   if(currentColor == "red"){
      brushColor = circle.red.col;
@@ -112,6 +117,13 @@ function mousePressed() {
   } if(currentColor == "yellow") {
      brushColor = circle.yellow.col;
   } if(currentColor == "random") {
-     brushColor = random(255), random(255), random(255);
+     brushColor = color(random(255), random(255), random(255));
   }
+
+//Change Brush Size
+	if(brushSelection == "smaller"){
+		brushSize--;
+	} if(brushSelection == "larger"){
+		brushSize++;
+	}
 }
