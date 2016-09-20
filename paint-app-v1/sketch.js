@@ -120,10 +120,21 @@ function mousePressed() {
      brushColor = color(random(255), random(255), random(255));
   }
 
-//Change Brush Size
+//Change Brush Size -- Button
 	if(brushSelection == "smaller"){
 		brushSize--;
 	} if(brushSelection == "larger"){
 		brushSize++;
 	}
+
+}
+
+//Change Brush Size -- Keys
+
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    brushSize--;
+  } else if (keyCode === RIGHT_ARROW) {
+    brushSize++;
+  }
 }
