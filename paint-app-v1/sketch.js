@@ -3,13 +3,14 @@ var brushColor = "0";
 var brushSize = 10;
 var brushSelection;
 
+
 //Initializing Color Samples
 var circle = {
 	red : {x: 100, col: "#e54341", leftSide: 60, rightSide: 140},
 	green: {x: 200, col: "#60b896", leftSide: 160, rightSide: 240},
 	lilac: {x: 300, col: "#9b84af", leftSide: 260, rightSide: 340},
 	yellow: {x: 400, col: "#f7b320", leftSide: 360, rightSide: 440 },
-	random: {x: 500, col : '0', leftSide: 460, rightSide: 540},
+	random: {x: 500, leftSide: 460, rightSide: 540},
 	y: 500,
 	diameter: 80,
   radius: 40
@@ -44,7 +45,7 @@ function setup() {
 function draw() {
 
 //brushSelect Sizes
-fill(brushSelect.small.col)
+fill(brushSelect.small.col);
 ellipse(brushSelect.small.x, brushSelect.y, brushSelect.small.diameter, brushSelect.small.diameter);
 
 fill(brushSelect.large.col)
@@ -64,7 +65,7 @@ ellipse(circle.lilac.x, circle.y, circle.diameter, circle.diameter);
 fill(circle.yellow.col);//yellow
 ellipse(circle.yellow.x, circle.y, circle.diameter, circle.diameter);
 
-fill(circle.random.col);//random (grey scale)
+fill(random(255), random(255), random(255));//random (grey scale)
 ellipse(circle.random.x, circle.y, circle.diameter, circle.diameter);
 
 // Selecting Colors
@@ -88,12 +89,10 @@ if(mouseY > circleBoundary.top && mouseY < circleBoundary.bottom){
 }
 
 //Create brushSelect'
-
 	fill(brushColor);
+	noStroke();
 	ellipse(mouseX, mouseY, brushSize, brushSize);
-
-
-
+  stroke(1);
 
 
 
@@ -110,11 +109,7 @@ if(mouseY > smallBoundary.top && mouseY < smallBoundary.bottom){
 }
 
 function mousePressed() {
-	while(true){
-			console.log('down');
-	} else {
-		console.log('up');
-	}
+
 
 //Change Brush Color
   console.log(currentColor);
